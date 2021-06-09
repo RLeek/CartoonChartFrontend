@@ -175,7 +175,7 @@ const CalenderForm = (props:Props) => {
 
 
             <div className=" z-20 fixed bottom-8 md:hidden py-2 fixed shadow-md rounded-md flex flex-row bg-gray-900 text-gray-300 transform left-1/2 -translate-x-1/2">
-                <SmallDropdown name = "Year" value = {year} onChange={setYear} values={["2017", "2018", "2019", "2020"]}/>
+                <SmallDropdown name = "Year" value = {year} onChange={setYear} values={yearRange}/>
                 <SmallDropdown name = "Season" value = {season} onChange={setSeason} values={["Summer", "Autumn", "Winter", "Spring"]}/>
                 <SmallDropdown name = "Format" value = {format} onChange={setFormat} values={["Television", "Movies", "All"]}/>
                 <SmallDropdown name = "Order" value = {sort} onChange={setSort} values={["Title", "Rating", "Release", "Popularity"]}/>
