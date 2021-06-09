@@ -63,7 +63,7 @@ const ShowCard = (Prop:props) => {
                   
                 
               </div>
-              <img  className = "rounded-l-md h-56 w-9-1 md:h-80 md:w-52 object-cover" src={"http://localhost:8000/"+cover} alt={title + " cover"}></img>
+              <img  className = "rounded-l-md h-56 w-9-1 md:h-80 md:w-52 object-cover" src={"https://api.cartooncalender.com/"+cover} alt={title + " cover"}></img>
               <div className = "pl-2 md:pl-4 pt-1 md:pt-2 flex flex-col h-56 md:h-80 relative">
                 <div className = " opacity-0 md:opacity-100 absolute right-4 flex flex-row pt-2 items-center "> 
                   {average_rating !== 0 &&
