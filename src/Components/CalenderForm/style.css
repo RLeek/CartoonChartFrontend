@@ -1,0 +1,4 @@
+.stick-bottom {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}

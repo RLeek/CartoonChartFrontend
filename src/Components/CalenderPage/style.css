@@ -1,0 +1,23 @@
+.column-handler {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+
+.max-width-3xl {
+    max-width: 1836px;
+}
+
+
+
+
+@media (min-width:1190px) {
+    .column-handler {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width:1650px) {
+    .column-handler {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+} 
