@@ -90,7 +90,7 @@ const CalenderForm = (props:Props) => {
                     </div>
                 </div>
             </div>
-            <div className = "relative right-0 z-30 mx-auto max-width-3xl md:px-16 lg:px-4 hidden md:block">
+            <div className = "relative right-0 z-20 mx-auto max-width-3xl md:px-16 lg:px-4 hidden md:block">
                 <div className = "float-right flex flex-reverse-row items-center pt-4 right-16">
                     <span className = "select-none font-semibold relative text-xl lg:text-2xl text-gray-800">Order By</span>
                     <span className = "text-gray-300">

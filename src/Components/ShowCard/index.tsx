@@ -129,7 +129,7 @@ const ShowCard = (Prop:props) => {
           </div>
           {video &&
           <>
-            <div className = "z-30 fixed top-0 left-0 float items-center w-full h-full" onClick = {()=>setVideo(false)}>              
+            <div className = "z-40 fixed top-0 left-0 float items-center w-full h-full" onClick = {()=>setVideo(false)}>              
               <iframe title= {title} className = "relative top-1/2 -translate-y-1/2 transform mx-auto w-5/6 h-5/6 rounded-lg" src={"https://www.youtube.com/embed/"+trailer.slice(32, trailer.length)} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </div>
             <div className = "fixed top-0 left-0 z-20 w-full h-full bg-black opacity-50" >
