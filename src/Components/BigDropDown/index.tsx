@@ -12,8 +12,6 @@ const BigDropDown = (props:DropDownProps) => {
     const onChange = props.onChange;
     const [active, setActive] = useState(false);
 
-    //Actually implement the drop down now
-
     return (
         <>
         <div className = " relative">
