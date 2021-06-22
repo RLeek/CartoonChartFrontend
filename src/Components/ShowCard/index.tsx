@@ -29,6 +29,9 @@ const ShowCard = (Prop:props) => {
     if (hovered) {
       return string;
     } 
+    if (string.length <= 240) {
+      return string;
+    }
     for (let i = 240; i > 0; i--) {
       if (string[i] === " ") {
         return string.substring(0, i) + " ...";
@@ -68,7 +71,7 @@ const ShowCard = (Prop:props) => {
                 <div className = " opacity-0 md:opacity-100 absolute right-4 flex flex-row pt-2 items-center "> 
                   {average_rating !== 0 &&
                     <>
-                      {average_rating > 7 &&
+                      {average_rating > 7.5 &&
                         <div className="text-green-500">
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" className="h-6 pt-0.5 float-left fill-current">
                             <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm2.16 3a6 6 0 0 1-11.32 0h11.32z"/>
@@ -76,14 +79,14 @@ const ShowCard = (Prop:props) => {
                         </div>
                       }
 
-                      {(average_rating<= 7) && (average_rating >= 5) &&
+                      {(average_rating<= 7.5) && (average_rating >= 6) &&
                         <div className="w-full text-centre text-yellow-400">
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" className="h-6 float-left pt-0.5 fill-current">
                             <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM7 13h6a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2z"/>
                           </svg>
                         </div>
                       }
-                      {average_rating < 5 &&
+                      {average_rating < 6 &&
                         <div className="w-full text-centre text-red-500">
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" className="h-6 float-left pt-0.5 fill-current">
                             <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM6.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm2.16 6H4.34a6 6 0 0 1 11.32 0z"/>
@@ -96,7 +99,11 @@ const ShowCard = (Prop:props) => {
                   }
                 </div>
                 <div className = "text-sm md:text-xl flex-none font-semibold md:mr-36 custom-height hover:h-auto overflow-hidden">{title}</div>
+                { runtime > 0 ?
                 <div className = " py-1 text-xxs md:text-xs">{format} - {runtime} mins</div>
+                    :
+                <div className = " py-1 text-xxs md:text-xs">{format}</div>
+                }
                 <div className = "md:hidden flex-grow flex-shrink md:mr-6 mr-2 text-xs md:text-sm overflow-y-auto">{synopsis}</div>
                 <div onMouseEnter={()=> setHovered(true)} onMouseLeave = {()=> setHovered(false)}   className = "hidden md:block flex-grow flex-shrink md:mr-6 mr-2 text-xs md:text-sm overflow-y-auto">{truncate(synopsis)}</div>
                 <div className = "pb-2 md:pb-4 pt-1">
