@@ -1,10 +1,11 @@
-import SmallDropdown from "../SmallDropDown";
-import BigDropDown from "../BigDropDown";
+import { SmallDropDown, SmallDropDownHref} from "../SmallDropDown";
+import { BigDropDown , BigDropDownHref} from "../BigDropDown";
 import { useEffect, useState } from "react";
 import './style.css'
 import { getSeason } from "../../Utilities/requests";
-import { monthToSeason, transformAnimations, transformFormat } from "../../Utilities/transformer"
+import { transformAnimations, transformFormat } from "../../Utilities/transformer"
 import {Calender} from "../../Utilities/types"
+import { useParams, Link } from "react-router-dom";
 
 type Props = {
     onChange:(shows:Calender)=>void;
@@ -13,11 +14,10 @@ type Props = {
 
 
 const CalenderForm = (props:Props) => {
+    const {season, year} = useParams<{season:string, year:string}>();
     const [sort, setSort] = useState("Rating");
     const [order, setOrder] = useState("Descending");
-    const [season, setSeason] = useState(monthToSeason(new Date().getMonth()));
     const [format, setFormat] =  useState("All");
-    const [year, setYear] = useState(new Date().getFullYear().toString());
     const {onChange, data } = props; 
     const yearRange =  Array.from({length:(new Date().getFullYear()+2-2019)},(v,k)=>k+2019).map(String);
 
@@ -64,6 +64,14 @@ const CalenderForm = (props:Props) => {
         }
     },[sort]) // eslint-disable-line react-hooks/exhaustive-deps
 
+    function yearUrl(season:string) {
+        return (year:string) => season+"-"+year;
+    }
+
+    function seasonUrl(year:string) {
+        return (season:string) => season+"-"+year;
+    }
+
 
     return (
         <>
@@ -72,16 +80,16 @@ const CalenderForm = (props:Props) => {
                     <div className = " grid grid-cols-4 bottom-0 pb-5 absolute  left-2/4 -translate-x-2/4 transform font-semibold text-center text-xl w-3/4 lg:w-3/5 xl:w-5/12">
                         {['Winter', 'Spring', 'Summer', 'Autumn'].map(key => key === season 
                             ?
-                            <p className = "select-none z-50 m-auto  cursor-pointer text-gray-300 lg:text-2xl text-xl" onClick={() => setSeason(key)}>{key}</p>
+                            <Link className = "select-none z-50 m-auto  cursor-pointer text-gray-300 lg:text-2xl text-xl" to={"/"+key + "-" + year}>{key}</Link>
                             :
-                            <p className = "select-none z-50 m-auto  cursor-pointer text-gray-500 lg:text-2xl text-xl" onClick={() => setSeason(key)}>{key}</p>
+                            <Link className = "select-none z-50 m-auto  cursor-pointer text-gray-500 lg:text-2xl text-xl" to={"/"+key + "-" + year}>{key}</Link>
                         )}
                     </div>
                     <div className = "grid grid-cols-2 transform bottom-0 mb-16 lg:mb-20 justify-items-center absolute left-2/4 -translate-x-2/4 transform lg:w-2/5 xl:4/12 w-4/5">
                         {/* Fix this next please! */}
                         <div className = "flex flex-row items-center m-auto">
                             <span className = "select-none font-semibold relative text-xl lg:text-2xl text-gray-500">Year</span>
-                            <BigDropDown value = {year} values={yearRange} onChange={setYear}/>
+                            <BigDropDownHref value = {year} values={yearRange} onChange={yearUrl(season)}/>
                         </div>
                         <div className = "flex flex-row items-center m-auto">
                             <span className = "select-none font-semibold relative text-xl lg:text-2xl text-gray-500">Format</span>
@@ -175,10 +183,10 @@ const CalenderForm = (props:Props) => {
 
 
             <div className=" z-20 fixed bottom-8 md:hidden py-2 fixed shadow-md rounded-md flex flex-row bg-gray-900 text-gray-300 transform left-1/2 -translate-x-1/2">
-                <SmallDropdown name = "Year" value = {year} onChange={setYear} values={yearRange}/>
-                <SmallDropdown name = "Season" value = {season} onChange={setSeason} values={["Summer", "Autumn", "Winter", "Spring"]}/>
-                <SmallDropdown name = "Format" value = {format} onChange={setFormat} values={["Television", "Movies", "All"]}/>
-                <SmallDropdown name = "Order" value = {sort} onChange={setSort} values={["Title", "Rating", "Release", "Popularity"]}/>
+                <SmallDropDownHref name = "Year" value = {year} onChange={yearUrl(season)} values={yearRange}/>
+                <SmallDropDownHref name = "Season" value = {season} onChange={seasonUrl(year)} values={["Summer", "Autumn", "Winter", "Spring"]}/> {/* Need to convert this to href */}
+                <SmallDropDown name = "Format" value = {format} onChange={setFormat} values={["Television", "Movies", "All"]}/>
+                <SmallDropDown name = "Order" value = {sort} onChange={setSort} values={["Title", "Rating", "Release", "Popularity"]}/>
 
 
                 <span className = "w-1/9 mt-0.5 cursor-pointer pr-2 sm:pr-4" onClick={()=>setOrder(order === "Ascending"?"Descending":"Ascending")}> 

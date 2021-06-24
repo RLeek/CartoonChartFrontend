@@ -14,7 +14,6 @@ const CalenderPage = () => {
             'Included':[]
         })
 
-
     //Get the current date
     //Use this relative to the release to determine how many days/months until release or after release
 
