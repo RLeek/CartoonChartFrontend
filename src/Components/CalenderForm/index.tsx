@@ -54,8 +54,8 @@ const CalenderForm = (props:Props) => {
             dataCopy["Television"].sort((a,b) => (a.average_rating - b.average_rating));
             dataCopy["Movies"].sort((a,b) => (a.average_rating - b.average_rating));
         } else { //sort by release
-            dataCopy["Television"].sort((a,b) => (a.release.getDate() - b.release.getDate())); //actualy cast to date first please!!!!
-            dataCopy["Movies"].sort((a,b) => (a.release.getDate() - b.release.getDate()));
+            dataCopy["Television"].sort((a,b) => (a.release.date.getDate() - b.release.date.getDate())); //actualy cast to date first please!!!!
+            dataCopy["Movies"].sort((a,b) => (a.release.date.getDate() - b.release.date.getDate()));
         }
         if (order === "Ascending") {
             onChange({"Television":dataCopy["Television"], "Movies":dataCopy["Movies"], "Included":data["Included"]})

@@ -21,7 +21,12 @@ const SortMap:Record<string, Sort> = {
 }
 
 export async function getSeason(season:string, year:string, sort:string, order:string) {
-    const response = await fetch("https://api.cartooncalender.com/animations?season="+ seasonMap[season] + "&year=" + year + "&sort=" + SortMap[sort] + "&order=" + OrderMap[order], {
+    /*
+    const response = await fetch("https://api.cartooncalender.com/animations?season="+ seasonMap[season] + "&year=" + year + "&sort=" + SortMap[sort] + "&order=" + OrderMap[order] + "&seasonType=year", {
+        method: 'GET', 
+    });
+    */
+    const response = await fetch("http://localhost:8000/animations?season="+ seasonMap[season] + "&year=" + year + "&sort=" + SortMap[sort] + "&order=" + OrderMap[order] + "&seasonType=year", {
         method: 'GET', 
     });
     return await response.json();

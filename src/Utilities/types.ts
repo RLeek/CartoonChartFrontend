@@ -10,6 +10,11 @@ const sort = ["views", "rating", "title", "release"] as const;
 type Sort = typeof sort[number];
 const sortValues = sort as ReadonlyArray<string>;
     
+const specificity = ["season", "month", "date"]
+type Specificity =   typeof specificity[number];
+const specificityValues = sort as ReadonlyArray<string>;
+
+
 type Format = "Television"|"Movies"
 
 type Calender = {
@@ -24,7 +29,10 @@ type Animation = {
     synopsis:string;
     format: string;
     status:string;
-    release: Date;
+    release: {
+        specificity:Specificity;
+        date:Date;
+    },
     episodes: number;
     runtime: number;
     cover: string;
@@ -40,4 +48,4 @@ type Animation = {
 }
 
 export { seasonValues, orderValues, sortValues };
-export type { Animation, Season, Order, Sort, Format, Calender };
+export type { Animation, Season, Order, Sort, Format, Calender, Specificity };

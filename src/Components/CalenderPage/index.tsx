@@ -35,7 +35,7 @@ const CalenderPage = () => {
 
                     <div className = "relative max-width-3xl md:px-16 lg:px-4 mt-6 mx-auto grid column-handler gap-6 pb-20">
                         {data[value].map(animation =>
-                            <ShowCard title= {animation.title} synopsis = {animation.synopsis} format={animation.format} release= {animation.release}  episodes = {animation.episodes} 
+                            <ShowCard title= {animation.title} synopsis = {animation.synopsis} format={animation.format} release= {animation.release.date} specificity={animation.release.specificity} episodes = {animation.episodes} 
                             genres = {animation.genres} runtime = {animation.runtime} cover = {animation.cover} trailer = {animation.trailer} views= {animation.views} average_rating = {animation.average_rating}
                              />
                         )}

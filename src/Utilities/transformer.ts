@@ -47,11 +47,11 @@ function transformAnimations(data:{data:Animation[]} , format:string) {
     //Iterate through data
     data['data'].forEach((entry)=> {
         if (entry['format'] === "Television") {
-            entry['release'] = new Date(entry['release']);
+            entry['release']['date'] = new Date(entry['release']['date']);
             shows['Television'].push(entry);
         } 
         if (entry['format'] === "Movie") {
-            entry['release'] = new Date(entry['release']);
+            entry['release']['date'] = new Date(entry['release']['date']);
             shows['Movies'].push(entry)
         }
     })

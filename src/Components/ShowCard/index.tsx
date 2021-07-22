@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Specificity } from '../../Utilities/types'
 import './style.css';
 
 
@@ -7,6 +8,7 @@ type props = {
   title: string,
   synopsis:string,
   format:string,
+  specificity:Specificity,
   release: Date,
   episodes: number,
   runtime: number,
@@ -19,7 +21,7 @@ type props = {
 
 
 const ShowCard = (Prop:props) => {
-  const {title, runtime, cover, trailer, average_rating, genres, synopsis, format, episodes } = Prop; 
+  const {title, runtime, cover, trailer, average_rating, genres, synopsis, format, episodes, specificity } = Prop; 
   const release = Prop.release;
   const [hovered, setHovered] = useState(false);
   const [video, setVideo] = useState(false);
@@ -50,6 +52,24 @@ const ShowCard = (Prop:props) => {
     return release.toLocaleString('default', {month:'long'}) + " " + release.getDate()+", " + release.getFullYear()
 
   }
+
+  function season():string {
+    if (curr_date.getMonth() <= 12 && curr_date.getMonth() >= 9) {
+      return "Autumn"
+    } 
+
+    if (curr_date.getMonth() <= 1 && curr_date.getMonth() >= 2) {
+      return "Summer"
+    } 
+
+    if (curr_date.getMonth() <= 3 && curr_date.getMonth() >= 5) {
+      return "Spring"
+    }
+
+    return "Winter"     
+  }
+
+
 
   return (
     <>
@@ -111,26 +131,32 @@ const ShowCard = (Prop:props) => {
                     {genres.map((genre)=> <div className = "text-center text-xxs md:text-xs bg-gray-400 px-2 mr-1 rounded-full font-semibold"> {genre}</div>)
                     }
                   </div>
-                  {curr_date.toISOString().slice(0, 10) > release.toISOString().slice(0, 10) &&
+                    {specificity == "season"?
+                      <>
+                        <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering in </div>
+                        <div className = "text-sm md:text-xl font-semibold">{season()}</div>
+                      </>
+                    :
                     <>
-                      <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiered on </div>
-                      <div className = "text-sm md:text-xl font-semibold">{release.toLocaleString('default', {month:'long'}) + " " + release.getDate()+", " + release.getFullYear()}</div>
-                    </>
-                  }
-
-                  {curr_date.toISOString().slice(0, 10) < release.toISOString().slice(0, 10) &&
-                    <>
-                      <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering in </div>
-                      <div className = "text-sm md:text-xl font-semibold">{dateDifference()}</div>
-                    </>
-                  }
-
-                  {curr_date.toISOString().slice(0, 10) === release.toISOString().slice(0, 10) &&
-                    <>
-                      <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering</div>
-                      <div className = "text-sm md:text-xl font-semibold">Today</div>
-                    </>
-                  }
+                      {curr_date.toISOString().slice(0, 10) > release.toISOString().slice(0, 10) &&
+                        <>
+                          <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiered on </div>
+                          <div className = "text-sm md:text-xl font-semibold">{release.toLocaleString('default', {month:'long'}) + " " + release.getDate()+", " + release.getFullYear()}</div>
+                        </>
+                      }
+                      {curr_date.toISOString().slice(0, 10) < release.toISOString().slice(0, 10) &&
+                        <>
+                          <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering in </div>
+                          <div className = "text-sm md:text-xl font-semibold">{dateDifference()}</div>
+                        </>
+                      }
+                      {curr_date.toISOString().slice(0, 10) === release.toISOString().slice(0, 10) &&
+                        <>
+                          <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering</div>
+                          <div className = "text-sm md:text-xl font-semibold">Today</div>
+                        </>
+                      }
+                    </>}
                 </div>
               </div>
           </div>
