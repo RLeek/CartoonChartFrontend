@@ -131,7 +131,7 @@ const ShowCard = (Prop:props) => {
                     {genres.map((genre)=> <div className = "text-center text-xxs md:text-xs bg-gray-400 px-2 mr-1 rounded-full font-semibold"> {genre}</div>)
                     }
                   </div>
-                    {specificity == "season"?
+                    {specificity === "season"?
                       <>
                         <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering in </div>
                         <div className = "text-sm md:text-xl font-semibold">{season()}</div>
