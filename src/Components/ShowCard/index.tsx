@@ -54,19 +54,20 @@ const ShowCard = (Prop:props) => {
   }
 
   function season():string {
-    if (curr_date.getMonth() <= 12 && curr_date.getMonth() >= 9) {
+ 
+    if ((curr_date.getMonth()+1 <= 12) && (curr_date.getMonth()+1 >= 9)) {
       return "Autumn"
     } 
 
-    if (curr_date.getMonth() <= 1 && curr_date.getMonth() >= 2) {
-      return "Summer"
+    if ((curr_date.getMonth()+1 <= 1) && (curr_date.getMonth()+1 >= 2)) {
+      return "Winter"
     } 
 
-    if (curr_date.getMonth() <= 3 && curr_date.getMonth() >= 5) {
+    if ((curr_date.getMonth()+1 <= 3) && (curr_date.getMonth()+1 >= 5)) {
       return "Spring"
     }
 
-    return "Winter"     
+    return "Summer"     
   }
 
 
