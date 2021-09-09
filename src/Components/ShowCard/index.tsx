@@ -131,29 +131,45 @@ const ShowCard = (Prop:props) => {
                     {genres.map((genre)=> <div className = "text-center text-xxs md:text-xs bg-gray-400 px-2 mr-1 rounded-full font-semibold"> {genre}</div>)
                     }
                   </div>
-                    {specificity === "season"?
+                    {specificity === "Season"?
                       <>
-                        <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering in </div>
+                        {episodes > 0 ? 
+                          <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering in </div>
+                          :
+                          <div className = "text-xxs md:text-xs"> Premiering in </div>
+                          }
                         <div className = "text-sm md:text-xl font-semibold">{season()}</div>
                       </>
                     :
                     <>
                       {curr_date.toISOString().slice(0, 10) > release.toISOString().slice(0, 10) &&
                         <>
+                        {episodes > 0 ? 
                           <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiered on </div>
+                          :
+                          <div className = "text-xxs md:text-xs"> Premiered on </div>
+                          }                          
                           <div className = "text-sm md:text-xl font-semibold">{release.toLocaleString('default', {month:'long'}) + " " + release.getDate()+", " + release.getFullYear()}</div>
                         </>
                       }
                       {curr_date.toISOString().slice(0, 10) < release.toISOString().slice(0, 10) &&
                         <>
+                        {episodes > 0 ? 
                           <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering in </div>
+                          :
+                          <div className = "text-xxs md:text-xs"> Premiering in </div>
+                          }                          
                           <div className = "text-sm md:text-xl font-semibold">{dateDifference()}</div>
                         </>
                       }
                       {curr_date.toISOString().slice(0, 10) === release.toISOString().slice(0, 10) &&
                         <>
-                          <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering</div>
-                          <div className = "text-sm md:text-xl font-semibold">Today</div>
+                        {episodes > 0 ? 
+                          <div className = "text-xxs md:text-xs"> {episodes} episodes - Premiering </div>
+                          :
+                          <div className = "text-xxs md:text-xs"> Premiering  </div>
+                          }                          
+                        <div className = "text-sm md:text-xl font-semibold">Today</div>
                         </>
                       }
                     </>}
